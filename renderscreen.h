@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QColor>
-#include "datatype.h"
+//#include "datatype.h"
 
 class RenderScreen final : public QWidget
 {
@@ -17,8 +17,8 @@ public:
     QColor backgroundColor() const {return mBackgroundColor;}
     void setLineColor(QColor color) {mLineColor = color;}
     QColor lineColor() const {return mLineColor;}
-    void setDataType(DataType *dataType);
-    DataType *dataType() const {return mDataType;}
+//    void setDataType(DataType *dataType);
+//    DataType *dataType() const {return mDataType;}
 //    QPainter & getPainter() {return mPainter;}
 
 protected:
@@ -29,7 +29,7 @@ signals:
 private:
     QColor mBackgroundColor;
     QColor mLineColor;
-    DataType *mDataType{nullptr};
+//    DataType *mDataType{nullptr};
 };
 
 #endif // RENDERSCREEN_H
