@@ -28,15 +28,15 @@ QPoint Plotter::calculatePoint(float t, QRect &canvas)
     QPoint center = canvas.center();
     QPointF point = computeShape(t);
     return QPoint (
-                point.x() * mScale + center.x(),
+                point.x() * mScale,
                 point.y() * mScale + center.y()
                 );
 }
 
 QPointF Plotter::computeShape(float t)
 {
-    float x = 2 * cos(t);
-    float y = 2 * sin(t);
+    float x = t;
+    float y = sin(t) + 0.33 * sin(3 * t) + 0.2 * sin(5 * t) + 0.14 * sin(7 * t) + 0.11 * sin(9 * t) + 0.09 * sin(11 * t);
     return QPointF(x, y);
 }
 
