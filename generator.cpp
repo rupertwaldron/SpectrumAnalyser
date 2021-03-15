@@ -12,6 +12,7 @@ Generator::~Generator()
 
 
 void Generator::generateData(float step, float *pDataArray) {
+//    isReady = false;
     double randA = QRandomGenerator::global()->bounded(1.0);
     double randB = QRandomGenerator::global()->bounded(1.0);
     double randC = QRandomGenerator::global()->bounded(1.0);
@@ -21,5 +22,14 @@ void Generator::generateData(float step, float *pDataArray) {
         float t = i * step;
         pDataArray[i] = sin(t) + randA * sin(3 * t) + randB * sin(5 * t) + randC * sin(7 * t) + randD * sin(9 * t) + randE * sin(11 * t);
     }
+    using namespace std::this_thread;     // sleep_for, sleep_until
+    using namespace std::chrono_literals;
+//    sleep_for(1s);
+//    isReady = true;
+}
+
+bool Generator::dataReady()
+{
+    return isReady;
 }
 

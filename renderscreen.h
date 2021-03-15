@@ -19,6 +19,7 @@ public:
     QColor backgroundColor() const {return mBackgroundColor;}
     void setLineColor(QColor color) {mLineColor = color;}
     QColor lineColor() const {return mLineColor;}
+    void startGenerator();
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 

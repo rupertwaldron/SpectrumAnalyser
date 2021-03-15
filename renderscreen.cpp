@@ -27,6 +27,12 @@ QSize RenderScreen::sizeHint() const
     return QSize(400, 400);
 }
 
+void RenderScreen::startGenerator() {
+    while (pGenerator->dataReady()) {
+        this->repaint();
+    }
+}
+
 void RenderScreen::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
