@@ -13,3 +13,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_btnPlot_clicked()
+{
+    ui->renderScreen->repaint();
+}

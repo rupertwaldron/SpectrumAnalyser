@@ -18,7 +18,7 @@ public:
     void setLineColor(QColor color) {mLineColor = color;}
     QColor lineColor() const {return mLineColor;}
 //    void setDataType(DataType *dataType);
-//    DataType *dataType() const {return mDataType;}
+//    Plotter plotter() const {return mPlotter;}
 //    QPainter & getPainter() {return mPainter;}
 
 protected:
