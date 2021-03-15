@@ -6,8 +6,8 @@
 RenderScreen::RenderScreen(QWidget *parent) :
     QWidget(parent),
     mBackgroundColor(QColor (0, 0, 255)),
-    mLineColor(255, 255, 255)
-//    mDataType{new DataType()}
+    mLineColor(255, 255, 255),
+    mPlotter()
 {
     qInfo("RenderScreen(QWidget *)");
 }
@@ -50,6 +50,5 @@ void RenderScreen::paintEvent(QPaintEvent *event)
 
     painter.drawRect(canvas);
 //    painter.drawLine(this->rect().topLeft(), this->rect().bottomRight());
-    Plotter plotter;
-    plotter.plotData(canvas, painter);
+    mPlotter.plotData(canvas, painter);
 }

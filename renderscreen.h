@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QColor>
-//#include "datatype.h"
+#include "plotter.h"
 
 class RenderScreen final : public QWidget
 {
@@ -29,7 +29,7 @@ signals:
 private:
     QColor mBackgroundColor;
     QColor mLineColor;
-//    DataType *mDataType{nullptr};
+    Plotter mPlotter;
 };
 
 #endif // RENDERSCREEN_H
