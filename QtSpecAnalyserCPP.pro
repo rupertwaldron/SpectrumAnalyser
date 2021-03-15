@@ -9,14 +9,14 @@ CONFIG += c++2a
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    datagenerator.cpp \
+    generator.cpp \
     main.cpp \
     mainwindow.cpp \
     plotter.cpp \
     renderscreen.cpp
 
 HEADERS += \
-    datagenerator.h \
+    generator.h \
     mainwindow.h \
     plotter.h \
     renderscreen.h

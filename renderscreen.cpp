@@ -1,5 +1,4 @@
 #include "renderscreen.h"
-#include "plotter.h"
 #include <QPaintEvent>
 #include <QPainter>
 
@@ -7,7 +6,7 @@ RenderScreen::RenderScreen(QWidget *parent) :
     QWidget(parent),
     mBackgroundColor(QColor (0, 0, 255)),
     mLineColor(255, 255, 255),
-    mPlotter()
+    mPlotter(Plotter())
 {
     qInfo("RenderScreen(QWidget *)");
 }
@@ -28,15 +27,10 @@ QSize RenderScreen::sizeHint() const
     return QSize(400, 400);
 }
 
-//void RenderScreen::setDataType(DataType *dataType)
-//{
-//    if (mDataType == nullptr) {
-//        mDataType = dataType;
-//    } else {
-//        delete mDataType;
-//        mDataType = dataType;
-//    }
-//}
+void RenderScreen::startGenerator()
+{
+
+}
 
 void RenderScreen::paintEvent(QPaintEvent *event)
 {
@@ -48,7 +42,8 @@ void RenderScreen::paintEvent(QPaintEvent *event)
 
     auto canvas = this->rect();
 
+    float myData[256];
+
     painter.drawRect(canvas);
-//    painter.drawLine(this->rect().topLeft(), this->rect().bottomRight());
-    mPlotter.plotData(canvas, painter);
+    mPlotter.plotData(canvas, painter, myData);
 }

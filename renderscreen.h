@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QColor>
 #include "plotter.h"
+#include "generator.h"
 
 class RenderScreen final : public QWidget
 {
@@ -17,9 +18,8 @@ public:
     QColor backgroundColor() const {return mBackgroundColor;}
     void setLineColor(QColor color) {mLineColor = color;}
     QColor lineColor() const {return mLineColor;}
-//    void setDataType(DataType *dataType);
-//    Plotter plotter() const {return mPlotter;}
-//    QPainter & getPainter() {return mPainter;}
+    void startGenerator();
+    void dataReady();
 
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
