@@ -5,7 +5,8 @@
 #include<thread>
 #include <QRandomGenerator>
 
-Plotter::Plotter()
+Plotter::Plotter() :
+    mDataGenerator(DataGenerator())
 {
     qInfo("Plotter()");
 }
@@ -31,7 +32,7 @@ Plotter::~Plotter()
 void Plotter::plotData(QRect &canvas, QPainter &painter)
 {
     float step = mIntervalLength / mStepCount;
-    generateData(step);
+    mDataGenerator.generateData(step, pData);
     QPoint previousPixel = calculatePoint(0, step, canvas);
     for (int i = 0; i < 256; ++i) {
 //        std::this_thread::sleep_for(std::chrono::milliseconds(10));

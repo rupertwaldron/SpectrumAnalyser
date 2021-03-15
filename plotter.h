@@ -2,6 +2,7 @@
 #define PLOTTER_H
 #include <QPaintEvent>
 #include <QPainter>
+#include "datagenerator.h"
 
 
 class Plotter
@@ -17,6 +18,7 @@ private:
     float mIntervalLength{4 * M_PI};
     float mScale{40};
     int mStepCount{256};
+    DataGenerator mDataGenerator;
     float *pData{new float[256]};
 };
 
