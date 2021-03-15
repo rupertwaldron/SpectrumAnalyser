@@ -18,8 +18,8 @@ private:
     float mIntervalLength{4 * M_PI};
     float mScale{40};
     int mStepCount{256};
-    DataGenerator mDataGenerator;
     float *pData{new float[256]};
+    DataGenerator mDataGenerator;
 };
 
 #endif // PLOTTER_H
