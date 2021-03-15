@@ -29,6 +29,10 @@ private:
     QColor mLineColor;
     Plotter *pPlotter;
     Generator *pGenerator;
+    float *pData{new float[256]};
+    float mIntervalLength{4 * M_PI};
+    float mScale{40};
+    int mStepCount{256};
 };
 
 #endif // RENDERSCREEN_H

@@ -9,15 +9,10 @@ class Plotter
 public:
     Plotter();
     ~Plotter();
-    void plotData(QRect &, QPainter &, float *);
+    void plotData(QRect &canvas, QPainter &painter, float *pData, float step, float scale);
 private:
-    QPoint calculatePoint(int, float, QRect &, float);
+    QPoint calculatePoint(int, float, QRect &, float, float);
     QPointF computeShape(float);
-    void generateData(float);
-    float mIntervalLength{4 * M_PI};
-    float mScale{40};
-    int mStepCount{256};
-//    float *pData{new float[256]};
 };
 
 #endif // PLOTTER_H

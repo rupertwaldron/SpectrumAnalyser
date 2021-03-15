@@ -37,8 +37,8 @@ void RenderScreen::paintEvent(QPaintEvent *event)
 
     auto canvas = this->rect();
 
-    float myData[256];
-
+    float step = mIntervalLength / mStepCount;
+    pGenerator->generateData(step, pData);
     painter.drawRect(canvas);
-    pPlotter->plotData(canvas, painter, myData);
+    pPlotter->plotData(canvas, painter, pData, step, mScale);
 }
