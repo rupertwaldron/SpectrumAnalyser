@@ -5,8 +5,9 @@
 #include <QColor>
 #include "plotter.h"
 #include "generator.h"
+#include <QPaintEvent>
 
-class RenderScreen final : public QWidget
+class RenderScreen : public QWidget
 {
     Q_OBJECT
 public:
@@ -18,9 +19,6 @@ public:
     QColor backgroundColor() const {return mBackgroundColor;}
     void setLineColor(QColor color) {mLineColor = color;}
     QColor lineColor() const {return mLineColor;}
-    void startGenerator();
-    void dataReady();
-
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
@@ -29,7 +27,8 @@ signals:
 private:
     QColor mBackgroundColor;
     QColor mLineColor;
-    Plotter mPlotter;
+    Plotter *pPlotter;
+    Generator *pGenerator;
 };
 
 #endif // RENDERSCREEN_H

@@ -1,10 +1,7 @@
 #ifndef GENERATOR_H
 #define GENERATOR_H
 
-#include "renderscreen.h"
-#include <QWidget>
-
-
+#include <QRandomGenerator>
 
 class Generator
 {

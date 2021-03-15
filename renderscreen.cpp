@@ -1,19 +1,19 @@
 #include "renderscreen.h"
-#include <QPaintEvent>
-#include <QPainter>
 
 RenderScreen::RenderScreen(QWidget *parent) :
-    QWidget(parent),
-    mBackgroundColor(QColor (0, 0, 255)),
-    mLineColor(255, 255, 255),
-    mPlotter(Plotter())
+    QWidget{parent},
+    mBackgroundColor{QColor (0, 0, 255)},
+    mLineColor{255, 255, 255},
+    pPlotter{new Plotter()},
+    pGenerator{new Generator()}
 {
     qInfo("RenderScreen(QWidget *)");
 }
 
 RenderScreen::~RenderScreen()
 {
-//    delete mDataType;
+    delete pPlotter;
+    delete pGenerator;
     qInfo("~RenderScreen()");
 }
 
@@ -25,11 +25,6 @@ QSize RenderScreen::minimumSizeHint() const
 QSize RenderScreen::sizeHint() const
 {
     return QSize(400, 400);
-}
-
-void RenderScreen::startGenerator()
-{
-
 }
 
 void RenderScreen::paintEvent(QPaintEvent *event)
@@ -45,5 +40,5 @@ void RenderScreen::paintEvent(QPaintEvent *event)
     float myData[256];
 
     painter.drawRect(canvas);
-    mPlotter.plotData(canvas, painter, myData);
+    pPlotter->plotData(canvas, painter, myData);
 }

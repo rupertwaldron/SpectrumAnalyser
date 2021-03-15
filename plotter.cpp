@@ -1,7 +1,4 @@
 #include "plotter.h"
-#include <QPaintEvent>
-#include <QPainter>
-#include <QRandomGenerator>
 
 Plotter::Plotter()
 {
