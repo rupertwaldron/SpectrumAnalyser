@@ -4,6 +4,7 @@
 
 #include <QtMultimedia/QAudioDeviceInfo>
 #include <QtMultimedia/QAudioInput>
+#include <QCoreApplication>
 
 AudioGenerator::AudioGenerator(QObject *parent) :
     QObject(parent),
@@ -17,21 +18,22 @@ AudioGenerator::AudioGenerator(QObject *parent) :
 void AudioGenerator::subscribe(RenderScreen * screen, float *pDataArray, float step)
 {
 
-    using namespace std::this_thread;     // sleep_for, sleep_until
+    using namespace std::this_thread;
     using namespace std::chrono_literals;
     m_renderScreen = screen;
     qInfo("Render Screen subscribed to AudioGenerator");
-    setUpAudio(screen);
+    setUpAudio(step, pDataArray);
 //    for (int i = 0; i < 10; ++i) {
 //         std::thread gen([&]{generateData(step, pDataArray);});
 //         sleep_for(1s);
 //         gen.join();
-//         QCoreApplication::processEvents();
-//         m_renderScreen->display();
+//
 //    }
+    QCoreApplication::processEvents();
+    m_renderScreen->display();
 }
 
-void AudioGenerator::setUpAudio(RenderScreen * screen)
+void AudioGenerator::setUpAudio(float step, float *pDataArray)
 {
     qInfo("Setting up Audio");
     QAudioDeviceInfo inputDevice = QAudioDeviceInfo::defaultInputDevice();
@@ -55,7 +57,7 @@ void AudioGenerator::setUpAudio(RenderScreen * screen)
 #else
         m_audioInput->setBufferSize(1024);
 #endif
-        m_device = new AudioGeneratorIODevice(screen, this);
+        m_device = new AudioGeneratorIODevice(step, pDataArray, this);
         m_device->open(QIODevice::WriteOnly);
 
         m_audioInput->start(m_device);

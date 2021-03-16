@@ -1,23 +1,11 @@
 #include "audiogeneratoriodevice.h"
 
-AudioGeneratorIODevice::AudioGeneratorIODevice(RenderScreen *screen, QObject *parent) :
+AudioGeneratorIODevice::AudioGeneratorIODevice(float step, float *data, QObject *parent) :
     QIODevice(parent),
-    m_renderScreen(screen)
+    m_step(step),
+    m_screenData(data)
 {
-    qInfo("AudioGeneratorIODevice(QObject *)");
-}
-
-AudioGeneratorIODevice::~AudioGeneratorIODevice()
-{
-    qInfo("~AudioGeneratorIODevice()");
-}
-
-
-qint64 AudioGeneratorIODevice::readData(char *data, qint64 maxSize)
-{
-    Q_UNUSED(data)
-    Q_UNUSED(maxSize)
-    return -1;
+    qInfo("AudioGeneratorIODevice(float, float *, QObject *)");
 }
 
 qint64 AudioGeneratorIODevice::writeData(const char *data, qint64 maxSize)
@@ -65,4 +53,16 @@ qint64 AudioGeneratorIODevice::writeData(const char *data, qint64 maxSize)
 //    m_proxy->resetArray(m_array);
 
     return maxSize;
+}
+
+qint64 AudioGeneratorIODevice::readData(char *data, qint64 maxSize)
+{
+    Q_UNUSED(data)
+    Q_UNUSED(maxSize)
+    return -1;
+}
+
+AudioGeneratorIODevice::~AudioGeneratorIODevice()
+{
+    qInfo("~AudioGeneratorIODevice()");
 }

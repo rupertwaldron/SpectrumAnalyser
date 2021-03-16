@@ -24,31 +24,31 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnPlot">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
       <x>650</x>
       <y>70</y>
-      <width>80</width>
-      <height>24</height>
+      <width>82</width>
+      <height>56</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Plot Data</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnAudio">
-    <property name="geometry">
-     <rect>
-      <x>650</x>
-      <y>120</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Plot Audio</string>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="btnPlot">
+       <property name="text">
+        <string>Plot Data</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnAudio">
+       <property name="text">
+        <string>Plot Audio</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>

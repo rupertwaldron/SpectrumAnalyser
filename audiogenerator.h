@@ -22,7 +22,7 @@ private:
     RenderScreen *m_renderScreen;
     AudioGeneratorIODevice *m_device;
     QAudioInput *m_audioInput;
-    void setUpAudio(RenderScreen * screen);
+    void setUpAudio(float step, float *pDataArray);
 
 signals:
 
