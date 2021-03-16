@@ -29,8 +29,8 @@ void AudioGenerator::subscribe(RenderScreen * screen, float *pDataArray, float s
 //         gen.join();
 //
 //    }
-    QCoreApplication::processEvents();
-    m_renderScreen->display();
+//    QCoreApplication::processEvents();
+//    m_renderScreen->display();
 }
 
 void AudioGenerator::setUpAudio(float step, float *pDataArray)
@@ -57,7 +57,7 @@ void AudioGenerator::setUpAudio(float step, float *pDataArray)
 #else
         m_audioInput->setBufferSize(1024);
 #endif
-        m_device = new AudioGeneratorIODevice(step, pDataArray, this);
+        m_device = new AudioGeneratorIODevice(m_renderScreen, step, pDataArray, this);
         m_device->open(QIODevice::WriteOnly);
 
         m_audioInput->start(m_device);

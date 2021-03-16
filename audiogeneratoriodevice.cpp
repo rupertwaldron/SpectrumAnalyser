@@ -1,13 +1,16 @@
 #include "audiogeneratoriodevice.h"
+#include "renderscreen.h"
 
 #include <QTextStream>
+#include <QCoreApplication>
 
 static const int rowSize = 256;
 
-AudioGeneratorIODevice::AudioGeneratorIODevice(float step, float *data, QObject *parent) :
+AudioGeneratorIODevice::AudioGeneratorIODevice(RenderScreen * screen, float step, float *data, QObject *parent) :
     QIODevice(parent),
     m_step(step),
-    m_screenData(data)
+    m_screenData(data),
+    m_renderScreen(screen)
 {
     qInfo("AudioGeneratorIODevice(float, float *, QObject *)");
 }
@@ -18,8 +21,11 @@ qint64 AudioGeneratorIODevice::writeData(const char *data, qint64 maxSize)
 //    float value = float(quint8(data[128]) - 128) / 1.28f + 0.01f;
 
     for (int i = 0; i < rowSize; ++i) {
-        m_screenData[i] = float(quint8(data[128]) - 128) / 1.28f + 0.01f;
+        m_screenData[i] = float(quint8(data[i]) - 128) / 1.28f + 0.01f;
     }
+
+    QCoreApplication::processEvents();
+    m_renderScreen->display();
 
 //    QTextStream(stdout) << "Data = " << value << Qt::endl;
 

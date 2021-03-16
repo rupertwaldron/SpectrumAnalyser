@@ -9,9 +9,8 @@ class RenderScreen;
 class AudioGeneratorIODevice : public QIODevice
 {
     Q_OBJECT
-    RenderScreen * m_renderScreen;
 public:
-    AudioGeneratorIODevice(float step, float *data, QObject *parent = 0);
+    AudioGeneratorIODevice(RenderScreen * screen, float step, float *data, QObject *parent = 0);
     ~AudioGeneratorIODevice();
 
 protected:
@@ -21,6 +20,7 @@ protected:
 private:
     float m_step;
     float *m_screenData;
+    RenderScreen *m_renderScreen;
 };
 
 #endif // AUDIOGENERATORIODEVICE_H
