@@ -1,5 +1,9 @@
 #include "audiogeneratoriodevice.h"
 
+#include <QTextStream>
+
+static const int rowSize = 256;
+
 AudioGeneratorIODevice::AudioGeneratorIODevice(float step, float *data, QObject *parent) :
     QIODevice(parent),
     m_step(step),
@@ -10,6 +14,15 @@ AudioGeneratorIODevice::AudioGeneratorIODevice(float step, float *data, QObject 
 
 qint64 AudioGeneratorIODevice::writeData(const char *data, qint64 maxSize)
 {
+//    QTextStream(stdout) << "Max Size = " << maxSize << Qt::endl;
+//    float value = float(quint8(data[128]) - 128) / 1.28f + 0.01f;
+
+    for (int i = 0; i < rowSize; ++i) {
+        m_screenData[i] = float(quint8(data[128]) - 128) / 1.28f + 0.01f;
+    }
+
+//    QTextStream(stdout) << "Data = " << value << Qt::endl;
+
 //    // The amount of new data available.
 //    int newDataSize = maxSize / resolution;
 
