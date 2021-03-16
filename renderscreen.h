@@ -34,10 +34,10 @@ private:
     Plotter *pPlotter;
     Generator *pGenerator;
     AudioGenerator *pAudioGenerator;
-    float *pData{new float[256]};
+    float *pData{new float[512]};
     float mIntervalLength{4 * M_PI};
     float mScale{40};
-    int mStepCount{256};
+    int mStepCount{512};
 };
 
 #endif // RENDERSCREEN_H

@@ -15,7 +15,7 @@ void Plotter::plotData(QRect &canvas, QPainter &painter, float *pData, float ste
 {
 //    mDataGenerator.generateData(step, pData);
     QPoint previousPixel = calculatePoint(0, step, canvas, pData[0], scale);
-    for (int i = 0; i < 256; ++i) {
+    for (int i = 0; i < 512; ++i) {
         QPoint pixel = calculatePoint(i, step, canvas, pData[i], scale);
         painter.drawLine(previousPixel, pixel);
         previousPixel = pixel;

@@ -4,7 +4,7 @@
 #include <QTextStream>
 #include <QCoreApplication>
 
-static const int rowSize = 256;
+static const int rowSize = 512;
 
 AudioGeneratorIODevice::AudioGeneratorIODevice(RenderScreen * screen, float step, float *data, QObject *parent) :
     QIODevice(parent),
@@ -21,6 +21,7 @@ qint64 AudioGeneratorIODevice::writeData(const char *data, qint64 maxSize)
 //    float value = float(quint8(data[128]) - 128) / 1.28f + 0.01f;
 
     for (int i = 0; i < rowSize; ++i) {
+//        m_screenData[i] = float(quint8(data[i]) - 128) / 1.28f + 0.01f;
         m_screenData[i] = float(quint8(data[i]) - 128) / 1.28f + 0.01f;
     }
 

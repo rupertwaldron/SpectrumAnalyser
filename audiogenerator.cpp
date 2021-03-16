@@ -53,7 +53,7 @@ void AudioGenerator::setUpAudio(float step, float *pDataArray)
         m_audioInput = new QAudioInput(inputDevice, formatAudio, this);
 #ifdef Q_OS_MAC
         // OS X seems to wait for entire buffer to fill before calling writeData, so use smaller buffer
-        m_audioInput->setBufferSize(256);
+        m_audioInput->setBufferSize(512);
 #else
         m_audioInput->setBufferSize(1024);
 #endif
