@@ -20,6 +20,7 @@ public:
     void setLineColor(QColor color) {mLineColor = color;}
     QColor lineColor() const {return mLineColor;}
     void startGenerator();
+    void display();
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 

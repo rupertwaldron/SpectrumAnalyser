@@ -28,9 +28,13 @@ QSize RenderScreen::sizeHint() const
 }
 
 void RenderScreen::startGenerator() {
-    while (pGenerator->dataReady()) {
-        this->repaint();
-    }
+    float step = mIntervalLength / mStepCount;
+    pGenerator->subscribe(this, pData, step);
+}
+
+void RenderScreen::display()
+{
+    repaint();
 }
 
 void RenderScreen::paintEvent(QPaintEvent *event)
@@ -44,7 +48,7 @@ void RenderScreen::paintEvent(QPaintEvent *event)
     auto canvas = this->rect();
 
     float step = mIntervalLength / mStepCount;
-    pGenerator->generateData(step, pData);
+//    pGenerator->generateData(step, pData);
     painter.drawRect(canvas);
     pPlotter->plotData(canvas, painter, pData, step, mScale);
 }

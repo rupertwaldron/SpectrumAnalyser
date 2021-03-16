@@ -5,6 +5,8 @@
 #include <chrono>
 #include <thread>
 
+class RenderScreen;
+
 class Generator
 {
 public:
@@ -12,8 +14,10 @@ public:
     ~Generator();
     void generateData(float step, float *pDataArray);
     bool dataReady();
+    void subscribe(RenderScreen *screen, float *pDataArray, float step);
 private:
     bool isReady{false};
+    RenderScreen *pRenderScreen;
 };
 
 #endif // GENERATOR_H

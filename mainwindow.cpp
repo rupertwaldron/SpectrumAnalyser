@@ -16,5 +16,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btnPlot_clicked()
 {
-    ui->renderScreen->repaint();
+    ui->renderScreen->startGenerator();
 }
