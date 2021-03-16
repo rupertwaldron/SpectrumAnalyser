@@ -43,8 +43,9 @@ void Generator::subscribe(RenderScreen * screen, float *pDataArray, float step)
     pRenderScreen = screen;
     qInfo("Render Screen subscribed");
     for (int i = 0; i < 10; ++i) {
+         std::thread gen([&]{generateData(step, pDataArray);});
          sleep_for(1s);
-         generateData(step, pDataArray);
+         gen.join();
          QCoreApplication::processEvents();
          pRenderScreen->display();
     }
