@@ -1,7 +1,8 @@
 #include "audiogeneratoriodevice.h"
 
-AudioGeneratorIODevice::AudioGeneratorIODevice(QObject *parent) :
-    QIODevice(parent)
+AudioGeneratorIODevice::AudioGeneratorIODevice(RenderScreen *screen, QObject *parent) :
+    QIODevice(parent),
+    m_renderScreen(screen)
 {
     qInfo("AudioGeneratorIODevice(QObject *)");
 }

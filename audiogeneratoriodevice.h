@@ -4,11 +4,14 @@
 #include <QIODevice>
 #include <QObject>
 
+class RenderScreen;
+
 class AudioGeneratorIODevice : public QIODevice
 {
     Q_OBJECT
+    RenderScreen * m_renderScreen;
 public:
-    AudioGeneratorIODevice(QObject *parent = 0);
+    AudioGeneratorIODevice(RenderScreen *screen, QObject *parent = 0);
     ~AudioGeneratorIODevice();
 
 protected:

@@ -10,14 +10,9 @@ AudioGenerator::AudioGenerator(QObject *parent) :
     m_device(0),
     m_audioInput(0)
 {
-//    QAudioDeviceInfo inputDevice = QAudioDeviceInfo::defaultInputDevice();
     qInfo("~AudioGenerator(QObject *)");
 }
 
-AudioGenerator::~AudioGenerator()
-{
-    qInfo("~AudioGenerator()");
-}
 
 void AudioGenerator::subscribe(RenderScreen * screen, float *pDataArray, float step)
 {
@@ -25,6 +20,7 @@ void AudioGenerator::subscribe(RenderScreen * screen, float *pDataArray, float s
     using namespace std::chrono_literals;
     m_renderScreen = screen;
     qInfo("Render Screen subscribed");
+    setUpAudio(screen);
     for (int i = 0; i < 10; ++i) {
 //         std::thread gen([&]{generateData(step, pDataArray);});
 //         sleep_for(1s);
@@ -32,4 +28,44 @@ void AudioGenerator::subscribe(RenderScreen * screen, float *pDataArray, float s
 //         QCoreApplication::processEvents();
          m_renderScreen->display();
     }
+}
+
+void AudioGenerator::setUpAudio(RenderScreen * screen)
+{
+    qInfo("Setting up Audio");
+    QAudioDeviceInfo inputDevice = QAudioDeviceInfo::defaultInputDevice();
+
+    if (inputDevice.supportedSampleRates().size() > 0
+            && inputDevice.supportedChannelCounts().size() > 0
+            && inputDevice.supportedSampleSizes().size() > 0
+            && inputDevice.supportedCodecs().size() > 0) {
+        QAudioFormat formatAudio;
+        formatAudio.setSampleRate(inputDevice.supportedSampleRates().at(0));
+        formatAudio.setChannelCount(inputDevice.supportedChannelCounts().at(0));
+        formatAudio.setSampleSize(inputDevice.supportedSampleSizes().at(0));
+        formatAudio.setCodec(inputDevice.supportedCodecs().at(0));
+        formatAudio.setByteOrder(QAudioFormat::LittleEndian);
+        formatAudio.setSampleType(QAudioFormat::UnSignedInt);
+
+        m_audioInput = new QAudioInput(inputDevice, formatAudio, this);
+#ifdef Q_OS_MAC
+        // OS X seems to wait for entire buffer to fill before calling writeData, so use smaller buffer
+        m_audioInput->setBufferSize(256);
+#else
+        m_audioInput->setBufferSize(1024);
+#endif
+        m_device = new AudioGeneratorIODevice(screen, this);
+        m_device->open(QIODevice::WriteOnly);
+
+        m_audioInput->start(m_device);
+    } else {
+        // No graph content can be shown, so add a custom warning label
+      qInfo("No valid audio device found");
+    }
+}
+
+
+AudioGenerator::~AudioGenerator()
+{
+    qInfo("~AudioGenerator()");
 }
