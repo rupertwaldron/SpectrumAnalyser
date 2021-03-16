@@ -18,3 +18,8 @@ void MainWindow::on_btnPlot_clicked()
 {
     ui->renderScreen->startGenerator();
 }
+
+void MainWindow::on_btnAudio_clicked()
+{
+     ui->renderScreen->startAudio();
+}

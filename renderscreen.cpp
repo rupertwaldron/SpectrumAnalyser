@@ -5,7 +5,8 @@ RenderScreen::RenderScreen(QWidget *parent) :
     mBackgroundColor{QColor (0, 0, 255)},
     mLineColor{255, 255, 255},
     pPlotter{new Plotter()},
-    pGenerator{new Generator()}
+    pGenerator{new Generator()},
+    pAudioGenerator{new AudioGenerator()}
 {
     qInfo("RenderScreen(QWidget *)");
 }
@@ -14,6 +15,7 @@ RenderScreen::~RenderScreen()
 {
     delete pPlotter;
     delete pGenerator;
+    delete pAudioGenerator;
     qInfo("~RenderScreen()");
 }
 
@@ -30,6 +32,12 @@ QSize RenderScreen::sizeHint() const
 void RenderScreen::startGenerator() {
     float step = mIntervalLength / mStepCount;
     pGenerator->subscribe(this, pData, step);
+}
+
+void RenderScreen::startAudio()
+{
+    float step = mIntervalLength / mStepCount;
+    pAudioGenerator->subscribe(this, pData, step);
 }
 
 void RenderScreen::display()

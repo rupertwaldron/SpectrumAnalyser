@@ -41,7 +41,7 @@ void Generator::subscribe(RenderScreen * screen, float *pDataArray, float step)
     using namespace std::this_thread;     // sleep_for, sleep_until
     using namespace std::chrono_literals;
     pRenderScreen = screen;
-    qInfo("Render Screen subscribed");
+    qInfo("Render Screen subscribed to Data Generator");
     for (int i = 0; i < 10; ++i) {
          std::thread gen([&]{generateData(step, pDataArray);});
          sleep_for(1s);

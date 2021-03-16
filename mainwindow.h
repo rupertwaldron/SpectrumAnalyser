@@ -18,6 +18,8 @@ public:
 private slots:
     void on_btnPlot_clicked();
 
+    void on_btnAudio_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

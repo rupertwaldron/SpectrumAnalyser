@@ -16,18 +16,19 @@ AudioGenerator::AudioGenerator(QObject *parent) :
 
 void AudioGenerator::subscribe(RenderScreen * screen, float *pDataArray, float step)
 {
+
     using namespace std::this_thread;     // sleep_for, sleep_until
     using namespace std::chrono_literals;
     m_renderScreen = screen;
-    qInfo("Render Screen subscribed");
+    qInfo("Render Screen subscribed to AudioGenerator");
     setUpAudio(screen);
-    for (int i = 0; i < 10; ++i) {
+//    for (int i = 0; i < 10; ++i) {
 //         std::thread gen([&]{generateData(step, pDataArray);});
 //         sleep_for(1s);
 //         gen.join();
 //         QCoreApplication::processEvents();
-         m_renderScreen->display();
-    }
+//         m_renderScreen->display();
+//    }
 }
 
 void AudioGenerator::setUpAudio(RenderScreen * screen)
@@ -68,4 +69,9 @@ void AudioGenerator::setUpAudio(RenderScreen * screen)
 AudioGenerator::~AudioGenerator()
 {
     qInfo("~AudioGenerator()");
+    if (m_audioInput)
+        m_audioInput->stop();
+    if (m_device)
+        m_device->close();
+    delete m_device;
 }

@@ -5,6 +5,7 @@
 #include <QColor>
 #include "plotter.h"
 #include "generator.h"
+#include "audiogenerator.h"
 #include <QPaintEvent>
 
 class RenderScreen : public QWidget
@@ -20,6 +21,7 @@ public:
     void setLineColor(QColor color) {mLineColor = color;}
     QColor lineColor() const {return mLineColor;}
     void startGenerator();
+    void startAudio();
     void display();
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
@@ -31,6 +33,7 @@ private:
     QColor mLineColor;
     Plotter *pPlotter;
     Generator *pGenerator;
+    AudioGenerator *pAudioGenerator;
     float *pData{new float[256]};
     float mIntervalLength{4 * M_PI};
     float mScale{40};
