@@ -1,9 +1,11 @@
 #include "renderscreen.h"
 
+int const RenderScreen::m_dataSize{512};
+
 RenderScreen::RenderScreen(QWidget *parent) :
     QWidget{parent},
-    mBackgroundColor{QColor (0, 0, 255)},
-    mLineColor{255, 255, 255},
+    mBackgroundColor{Qt::darkMagenta},
+    mLineColor{Qt::yellow},
     pPlotter{new Plotter()},
     pGenerator{new Generator()},
     pAudioGenerator{new AudioGenerator()}

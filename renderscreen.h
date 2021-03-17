@@ -23,6 +23,10 @@ public:
     void startGenerator();
     void startAudio();
     void display();
+
+public:
+    static const int m_dataSize;
+
 protected:
     void paintEvent(QPaintEvent *event) Q_DECL_OVERRIDE;
 
@@ -34,10 +38,10 @@ private:
     Plotter *pPlotter;
     Generator *pGenerator;
     AudioGenerator *pAudioGenerator;
-    float *pData{new float[512]};
+    float *pData{new float[m_dataSize]};
     float mIntervalLength{4 * M_PI};
     float mScale{40};
-    int mStepCount{512};
+    int mStepCount{m_dataSize};
 };
 
 #endif // RENDERSCREEN_H

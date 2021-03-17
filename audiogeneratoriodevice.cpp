@@ -4,7 +4,7 @@
 #include <QTextStream>
 #include <QCoreApplication>
 
-static const int rowSize = 512;
+static const int rowSize = RenderScreen::m_dataSize;
 
 AudioGeneratorIODevice::AudioGeneratorIODevice(RenderScreen * screen, float step, float *data, QObject *parent) :
     QIODevice(parent),
