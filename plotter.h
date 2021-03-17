@@ -9,9 +9,9 @@ class Plotter
 public:
     Plotter();
     ~Plotter();
-    void plotData(QRect &canvas, QPainter &painter, float *pData, float step, float scale);
+    void plotData(QRect &canvas, QPainter &painter, float *pData, float step);
 private:
-    QPoint calculatePoint(int, float, QRect &, float, float);
+    QPoint calculatePoint(int, float, QRect &, float, float, float);
     QPointF computeShape(float);
 };
 

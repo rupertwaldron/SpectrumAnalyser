@@ -32,14 +32,12 @@ QSize RenderScreen::sizeHint() const
 }
 
 void RenderScreen::startGenerator() {
-    float step = mIntervalLength / mStepCount;
-    pGenerator->subscribe(this, pData, step);
+    pGenerator->subscribe(this, pData, mIntervalLength);
 }
 
 void RenderScreen::startAudio()
 {
-    float step = mIntervalLength / mStepCount;
-    pAudioGenerator->subscribe(this, pData, step);
+    pAudioGenerator->subscribe(this, pData, 1);
 }
 
 void RenderScreen::display()
@@ -56,9 +54,6 @@ void RenderScreen::paintEvent(QPaintEvent *event)
     painter.setPen(mLineColor);
 
     auto canvas = this->rect();
-
-    float step = mIntervalLength / mStepCount;
-//    pGenerator->generateData(step, pData);
     painter.drawRect(canvas);
-    pPlotter->plotData(canvas, painter, pData, step, mScale);
+    pPlotter->plotData(canvas, painter, pData, mIntervalLength);
 }

@@ -40,7 +40,6 @@ private:
     AudioGenerator *pAudioGenerator;
     float *pData{new float[m_dataSize]};
     float mIntervalLength{4 * M_PI};
-    float mScale{40};
     int mStepCount{m_dataSize};
 };
 
