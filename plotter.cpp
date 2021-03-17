@@ -17,13 +17,13 @@ void Plotter::plotData(QRect &canvas, QPainter &painter, float *pData, float int
     float step = intervalLength / RenderScreen::m_dataSize;
     float x_scale = canvas.width() / intervalLength;
 
-    float max = pData[0];
-    for (int i = 0; i < RenderScreen::m_dataSize; ++i)
-    {
-        if (pData[i] > max) max = pData[i];
-    }
+    float max = 5;
+//    for (int i = 0; i < RenderScreen::m_dataSize; ++i)
+//    {
+//        if (pData[i] > max) max = pData[i];
+//    }
 
-    float y_scale = canvas.height() / (4 * max);
+    float y_scale = canvas.height() / (2 * max);
 
     QPoint previousPixel = calculatePoint(0, step, canvas, pData[0], x_scale, y_scale);
     for (int i = 0; i < RenderScreen::m_dataSize; ++i)

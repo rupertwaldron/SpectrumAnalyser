@@ -17,13 +17,15 @@ AudioGeneratorIODevice::AudioGeneratorIODevice(RenderScreen * screen, float *dat
 
 qint64 AudioGeneratorIODevice::writeData(const char *data, qint64 maxSize)
 {
-    QTextStream(stdout) << "Max Size = " << maxSize << Qt::endl;
-    float value = float(quint8(data[128]) - 128) / 1.28f + 0.01f;
-    QTextStream(stdout) << "Value = " << value << Qt::endl;
+//    QTextStream(stdout) << "Max Size = " << maxSize << Qt::endl;
+//    float value = float(quint8(data[128]) - 128) / 1.28f + 0.01f;
+//    QTextStream(stdout) << "Value = " << value << Qt::endl;
 
-    for (int i = 0; i < rowSize; ++i) {
+    int stepSize = ceil(maxSize / RenderScreen::m_dataSize);
+
+    for (int i = 0, j = 0; i < rowSize; ++i, j += stepSize) {
 //        m_screenData[i] = float(quint8(data[i]) - 128) / 1.28f + 0.01f;
-        m_screenData[i] = float(quint8(data[i]) - 128) / 1.28f;
+        m_screenData[i] = float(quint8(data[j]) - 128) / 1.28f;
     }
 
     QCoreApplication::processEvents();
@@ -32,7 +34,6 @@ qint64 AudioGeneratorIODevice::writeData(const char *data, qint64 maxSize)
 //    QTextStream(stdout) << "Data = " << value << Qt::endl;
 
 //    // The amount of new data available.
-//    int newDataSize = maxSize / resolution;
 
 //    // If we get more data than array size, we need to adjust the start index for new data.
 //    int newDataStartIndex = qMax(0, (newDataSize - rowSize));
