@@ -32,16 +32,17 @@ QSize RenderScreen::sizeHint() const
 }
 
 void RenderScreen::startGenerator() {
-    pGenerator->subscribe(this, pData, mIntervalLength);
+    pGenerator->subscribe(this, pData, 4 * M_PI);
 }
 
 void RenderScreen::startAudio()
 {
-    pAudioGenerator->subscribe(this, pData, 1);
+    pAudioGenerator->subscribe(this, pData, 512);
 }
 
-void RenderScreen::display()
+void RenderScreen::display(float intervalLength)
 {
+    mIntervalLength = intervalLength;
     repaint();
 }
 

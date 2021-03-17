@@ -16,13 +16,13 @@ class AudioGenerator : public QObject
 public:
     AudioGenerator(QObject *parent = 0);
     ~AudioGenerator();
-    void subscribe(RenderScreen *screen, float *pDataArray, float step);
+    void subscribe(RenderScreen *screen, float *pDataArray, float intervalLength);
 
 private:
     RenderScreen *m_renderScreen{nullptr};
     AudioGeneratorIODevice *m_device;
     QAudioInput *m_audioInput;
-    void setUpAudio(float step, float *pDataArray);
+    void setUpAudio(float *pDataArray, float intervalLength);
 
 signals:
 

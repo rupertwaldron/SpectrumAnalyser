@@ -10,7 +10,7 @@ class AudioGeneratorIODevice : public QIODevice
 {
     Q_OBJECT
 public:
-    AudioGeneratorIODevice(RenderScreen * screen, float step, float *data, QObject *parent = 0);
+    AudioGeneratorIODevice(RenderScreen * screen, float *data, float intervalLength, QObject *parent = 0);
     ~AudioGeneratorIODevice();
 
 protected:
@@ -18,9 +18,9 @@ protected:
     qint64 writeData(const char *data, qint64 maxSize) Q_DECL_OVERRIDE;
 
 private:
-    float m_step;
-    float *m_screenData;
     RenderScreen *m_renderScreen;
+    float *m_screenData;
+    float m_intervalLength;
 };
 
 #endif // AUDIOGENERATORIODEVICE_H

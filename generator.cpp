@@ -46,7 +46,7 @@ void Generator::subscribe(RenderScreen *screen, float *pDataArray, float interva
          sleep_for(1s);
          gen.join();
          QCoreApplication::processEvents();
-         pRenderScreen->display();
+         pRenderScreen->display(intervalLength);
     }
 }
 

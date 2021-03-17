@@ -6,27 +6,28 @@
 
 static const int rowSize = RenderScreen::m_dataSize;
 
-AudioGeneratorIODevice::AudioGeneratorIODevice(RenderScreen * screen, float step, float *data, QObject *parent) :
+AudioGeneratorIODevice::AudioGeneratorIODevice(RenderScreen * screen, float *data, float intervalLength, QObject *parent) :
     QIODevice(parent),
-    m_step(step),
+    m_renderScreen(screen),
     m_screenData(data),
-    m_renderScreen(screen)
+    m_intervalLength(intervalLength)
 {
     qInfo("AudioGeneratorIODevice(float, float *, QObject *)");
 }
 
 qint64 AudioGeneratorIODevice::writeData(const char *data, qint64 maxSize)
 {
-//    QTextStream(stdout) << "Max Size = " << maxSize << Qt::endl;
-//    float value = float(quint8(data[128]) - 128) / 1.28f + 0.01f;
+    QTextStream(stdout) << "Max Size = " << maxSize << Qt::endl;
+    float value = float(quint8(data[128]) - 128) / 1.28f + 0.01f;
+    QTextStream(stdout) << "Value = " << value << Qt::endl;
 
     for (int i = 0; i < rowSize; ++i) {
 //        m_screenData[i] = float(quint8(data[i]) - 128) / 1.28f + 0.01f;
-        m_screenData[i] = float(quint8(data[i]) - 128) / 1.28f + 0.01f;
+        m_screenData[i] = float(quint8(data[i]) - 128) / 1.28f;
     }
 
     QCoreApplication::processEvents();
-    m_renderScreen->display();
+    m_renderScreen->display(m_intervalLength);
 
 //    QTextStream(stdout) << "Data = " << value << Qt::endl;
 

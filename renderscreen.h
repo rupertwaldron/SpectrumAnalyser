@@ -22,7 +22,7 @@ public:
     QColor lineColor() const {return mLineColor;}
     void startGenerator();
     void startAudio();
-    void display();
+    void display(float intervalLength);
 
 public:
     static const int m_dataSize;
